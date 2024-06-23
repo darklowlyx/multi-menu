@@ -5,6 +5,10 @@ $white: #f0f0f0;
 $black: #101010;
 $gray: #404040;
 
+$breakpoint-1: 61.9988em;
+$breakpoint-2: 47.9988em;
+$breakpoint-3: 35.9988em;
+
 *{
 	font-family: "Rubik", Arial, sans-serif;
 	background-color: $black;
@@ -37,99 +41,368 @@ $gray: #404040;
 /* -- HEADER -- */
 
 .header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 22;
+	color: $white;
+	transition: all 0.3s ease;
+	border-bottom: 2px solid;
 	&__container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding-top: 25px;
+		padding-bottom: 25px;
+		background-color: #ffffff00;
+		transition: all 0.1s ease;
+		&.change{
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
 	}
 	&__content {
 		display: flex;
 	}
 	&__left {
+		display: flex;
+		align-items: center;
+		gap: 20px;
+		z-index: 21;
 	}
 	&__menu {
 	}
 	&__burger {
+		z-index: 21;
+		display: block;
+		position: relative;
+		width: 20px;
+		height: 17px;
+		cursor: pointer;
+		span, 
+		&::before, 
+		&::after{
+			content: '';
+			left: 0;
+			position: absolute;
+			height: 2px;
+			width: 100%;
+			background-color: #fff;
+		}
+		&::before{
+			top: 0;
+		}
+		&::after{
+			bottom: 0;
+		}
+		span{
+			top: calc(50% - 1px);
+		}
+		&.active{
+			
+			span{
+				opacity: 0;
+			}
+			&::before{
+				transform: rotate(45deg);
+				top: calc(50% - 1px);
+			}
+			&::after{
+				transform: rotate(-45deg);
+				top: calc(50% - 1px);
+			}
+		}
 	}
 	&__menu-shell {
 	}
 	&__left-content {
+		display: flex;
+		justify-content: start;
+		gap: 10px;
+		align-items: center;
 	}
 	&__logo {
+		
 	}
 	&__logo-img {
+		width: 200px;
+		@media (max-width: $breakpoint-3){
+			display: none;
+		}
 	}
 	&__logo-mobile-img {
+		display: none;
+		@media (max-width: $breakpoint-3){
+			display: block;
+			width: 30px;
+		}
 	}
 	&__languages {
 	}
 	&__languages-content {
+		display: flex;
+		gap: 5px;
 	}
 	&__modal {
+		display: none;
+		position: absolute;
+		&.active{
+			display: flex;
+			flex-direction: column;
+			margin-top: 5px;
+			color: $black;
+			padding: 5px 5px;
+			border-radius: 5px;
+			gap: 5px;
+			background-color: #e0e0e6;
+		}
 	}
 	&__modal-item {
+		transition: all 0.1s ease;
+		padding: 5px;
+		&:hover{
+			background-color: #cdcdd3;
+		}
 	}
 	&__right {
+		display: flex;
+		align-items: center;
+		gap: 40px;
+		z-index: 21;
+		@media (max-width: $breakpoint-3){
+			gap: 10px;
+		}
 	}
 	&__login {
 	}
 	&__right-content {
+		position: relative;
 	}
 	&__centre {
+		font-size: 20px;
+		position: relative;
+		display: flex;
+		align-items: center;
+		gap: 5px;
+		span{
+			font-family: "Roboto Slab", serif;
+			@media (max-width: $breakpoint-2){
+				display: none;
+			}
+		}
+		& :first-child{
+			margin-right: 5px;
+		}
+		img:last-child{
+			@media (max-width: $breakpoint-2){
+			display: none;
+		}
+		}
 	}
 	&__search-content {
 	}
 	&__search {
+		cursor: pointer;
 	}
 	&__search-shell {
 	}
 }
 .shell {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	min-height: 100dvh;
+	background: $black;
+	padding: 150px 0px 30px 0px;
+	transition: top ease 0.3s;
+	display: none;
+	scrollbar-color: white white;
+	scrollbar-width: auto;
+	@media (max-width: $breakpoint-3){
+		padding: 140px 0px 30px 0px;
+	}
+	&.active{
+		display: block;
+	}
 	&__container {
+		display: grid;
+		gap: 40px;
+		grid-auto-columns: 1fr;
+		grid-template-areas: 
+		"one two three four";
+		
+		overflow-y: auto;
+		@media (max-width: $breakpoint-1){
+			grid-template-areas: 
+		"one two"
+		"three four";
+		max-height: 70dvh;
+		}
+		@media (max-width: $breakpoint-3){
+			grid-template-areas: 
+		"one"
+		"two"
+		"three"
+		"four";
+		
+		}
+		position: relative;
 	}
 	&__column {
+		gap: 20px;
 	}
 	&__item {
+	}
+}
+.item-shell {
+	display: flex;
+	flex-direction: column;
+	gap: 22px;
+	
+	&__title-content {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	&__title {
+		font-size: 18px;
+		transform: translate(0px);
+		animation: ani 0.4s forwards;
+		position: relative;
+		a{
+			font-family: "Rubik Mono One";
+		}
+	}
+	&__dropdown {
+		display: none;
+		@media (max-width: $breakpoint-3){
+			display: block;
+			width: 15px;
+			height: 15px;
+			transition: all 0.2s ease;
+			img{
+				width: 100%;
+				height: 100%;
+			}
+			&.active{
+				transform: rotate(-180deg);
+			}
+		}
+	}
+	&__nav {
+		@media (max-width: $breakpoint-3){
+			display: none;
+			&.active{
+				display: block;
+			}
+		}
+	}
+	&__list {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+	}
+	&__link {
+		animation: ani 0.8s forwards;
+		@media (max-width: $breakpoint-3){
+			animation: ani 0.2s forwards;
+		}
 	}
 }
 .column-1 {
-}
-.item-shell {
-	&__title-content {
-	}
-	&__title {
-	}
-	&__dropdown {
-	}
-	&__nav {
-	}
-	&__list {
-	}
-	&__link {
-	}
+	display: flex;
+	flex-direction: column;
+	gap: 50px;
+	grid-area: one;
 }
 .column-2 {
+	grid-area: two;
 }
 .column-3 {
+	grid-area: three;
 }
 .column-4 {
+	grid-area: four;
 }
 .modal {
+	display: none;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	background-color:  #fff;
+	color: $black;
+	z-index: 21;
+	border-radius: 5px;
+	padding: 15px;
 	&__content {
+		display: flex;
+			flex-direction: column;
+			gap: 20px;
+			align-items: flex-start;
+			&-icon {
+					margin-bottom: 10px;
+			}
+
+			&-text {
+					margin-bottom: 10px;
+			}
+
+			&-additional-text {
+					margin-top: 10px;
+			}
 	}
 	&__numbers {
 	}
+	.header__centre:hover + & {
+		display: block;
+}
 }
 .numbers-modal {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
 	&__item {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
 	}
 	&__title {
+		color: $gray;
+		font-size: 14px;
 	}
 	&__number {
+		font-size: 22px;
 	}
 	&__info {
+		font-size: 14px;
+		color: $gray; 
 	}
 }
 .shell-search {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	min-height: 100dvh;
+	background: $black;
+	padding: 150px 0px 30px 0px;
+	transition: top ease 0.3s;
+	display: none;
+	z-index: -5;
+	&.active{
+		display: block;
+	}
 	&__container {
 	}
 	&__input {
+		width: 100%;
+		background-color: #ffffff00;
+		border-radius: 5px;
+		border: 1px solid $white; 
+		font-size: 24px;
+		padding: 20px;
+		outline: none;
 	}
 }
