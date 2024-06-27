@@ -238,7 +238,7 @@ $breakpoint-3: 35.9988em;
 	width: 100%;
 	min-height: 100dvh;
 	background: $black;
-	padding: 150px 0px 30px 0px;
+	padding: 120px 0px 30px 0px;
 	transition: top ease 0.3s;
 	display: none;
 	scrollbar-color: white white;
@@ -373,6 +373,10 @@ $breakpoint-3: 35.9988em;
 		&-additional-text {
 				margin-top: 10px;
 		}
+		
+	}
+	@media (max-width: $breakpoint-2){
+		left: -90px;
 	}
 	&__numbers {
 	}
@@ -403,14 +407,12 @@ $breakpoint-3: 35.9988em;
 }
 .shell-search {
 	position: fixed;
-	top: 0;
+	@include adaptiv-value("top", 80, 44, 1);
 	left: 0;
 	width: 100%;
-	min-height: 100dvh;
 	background: $black;
-	padding: 150px 0px 30px 0px;
-	transition: top ease 0.3s;
 	display: none;
+	padding: 20px 0px 20px 0px;
 	z-index: -5;
 	&.active{
 		display: block;
